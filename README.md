@@ -2,13 +2,14 @@
 
 This is an Anime Discord bot that is built using the disnake library and it's using the Anilist, MyAnimeListAPI, JikanAPI libraries. It allows you to track anime airing episodes and notified when a new episode releases, or keep track of the anime you are watching, and displays how long it will take a new episode to come out.
 
-### Screenshots
+<img src="screenshots/discordss.png" />
 
 ### Features
 
 - Notifies on Discord when the next episode of an anime airs
 - Ability to track multiple anime
 - Lists information about every anime's airing time/how long for the next episode to come out.
+- Gives you the link to watch the episode right from discord.
 - Easy to use
 
 ### Prerequisites
