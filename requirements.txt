@@ -1,0 +1,5 @@
+AnilistPython==0.1.3
+beautifulsoup4==4.11.1
+disnake==2.5.2
+python-dotenv==0.21.0
+requests==2.27.1

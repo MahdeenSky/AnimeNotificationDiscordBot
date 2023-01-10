@@ -1,0 +1,185 @@
+{
+    "data": {
+        "mal_id": 19815,
+        "url": "https://myanimelist.net/anime/19815/No_Game_No_Life",
+        "images": {
+            "jpg": {
+                "image_url": "https://cdn.myanimelist.net/images/anime/1074/111944.jpg",
+                "small_image_url": "https://cdn.myanimelist.net/images/anime/1074/111944t.jpg",
+                "large_image_url": "https://cdn.myanimelist.net/images/anime/1074/111944l.jpg"
+            },
+            "webp": {
+                "image_url": "https://cdn.myanimelist.net/images/anime/1074/111944.webp",
+                "small_image_url": "https://cdn.myanimelist.net/images/anime/1074/111944t.webp",
+                "large_image_url": "https://cdn.myanimelist.net/images/anime/1074/111944l.webp"
+            }
+        },
+        "trailer": {
+            "youtube_id": "fV7nGIUuyzA",
+            "url": "https://www.youtube.com/watch?v=fV7nGIUuyzA",
+            "embed_url": "https://www.youtube.com/embed/fV7nGIUuyzA?enablejsapi=1&wmode=opaque&autoplay=1",
+            "images": {
+                "image_url": "https://img.youtube.com/vi/fV7nGIUuyzA/default.jpg",
+                "small_image_url": "https://img.youtube.com/vi/fV7nGIUuyzA/sddefault.jpg",
+                "medium_image_url": "https://img.youtube.com/vi/fV7nGIUuyzA/mqdefault.jpg",
+                "large_image_url": "https://img.youtube.com/vi/fV7nGIUuyzA/hqdefault.jpg",
+                "maximum_image_url": "https://img.youtube.com/vi/fV7nGIUuyzA/maxresdefault.jpg"
+            }
+        },
+        "approved": true,
+        "titles": [
+            {
+                "type": "Default",
+                "title": "No Game No Life"
+            },
+            {
+                "type": "Synonym",
+                "title": "NGNL"
+            },
+            {
+                "type": "Japanese",
+                "title": "\u30ce\u30fc\u30b2\u30fc\u30e0\u30fb\u30ce\u30fc\u30e9\u30a4\u30d5"
+            },
+            {
+                "type": "English",
+                "title": "No Game, No Life"
+            },
+            {
+                "type": "German",
+                "title": "No Game, No Life"
+            },
+            {
+                "type": "Spanish",
+                "title": "No Game, No Life"
+            },
+            {
+                "type": "French",
+                "title": "No Game, No Life"
+            }
+        ],
+        "title": "No Game No Life",
+        "title_english": "No Game, No Life",
+        "title_japanese": "\u30ce\u30fc\u30b2\u30fc\u30e0\u30fb\u30ce\u30fc\u30e9\u30a4\u30d5",
+        "title_synonyms": [
+            "NGNL"
+        ],
+        "type": "TV",
+        "source": "Light novel",
+        "episodes": 12,
+        "status": "Finished Airing",
+        "airing": false,
+        "aired": {
+            "from": "2014-04-09T00:00:00+00:00",
+            "to": "2014-06-25T00:00:00+00:00",
+            "prop": {
+                "from": {
+                    "day": 9,
+                    "month": 4,
+                    "year": 2014
+                },
+                "to": {
+                    "day": 25,
+                    "month": 6,
+                    "year": 2014
+                }
+            },
+            "string": "Apr 9, 2014 to Jun 25, 2014"
+        },
+        "duration": "23 min per ep",
+        "rating": "PG-13 - Teens 13 or older",
+        "score": 8.1,
+        "scored_by": 1430097,
+        "rank": 439,
+        "popularity": 15,
+        "members": 2204876,
+        "favorites": 46699,
+        "synopsis": "Sixteen sentient races inhabit Disboard, a world overseen by Tet, the One True God. The lowest of the sixteen\u2014Imanity\u2014consists of humans, a race with no affinity for magic. In a place where everything is decided through simple games, humankind seems to have no way out of their predicament\u2014but the arrival of two outsiders poses a change. On Earth, stepsiblings Sora and Shiro are two inseparable shut-ins who dominate various online games under the username \"Blank.\" While notorious on the internet, the pair believe that life is merely another dull game. However, after responding to a message from an unknown user, they are suddenly transported to Disboard. The mysterious sender turns out to be Tet, who informs them about the world's absolute rules. After Tet leaves, Sora and Shiro begin their search for more information and a place to stay, taking them to Elkia\u2014Imanity's only remaining kingdom. There, the duo encounters Stephanie Dola, an emotional girl vying for the kingdom's sovereignty. In desperation, she attempts to regain her father's throne, but her foolhardiness makes her goal unachievable. Inspired by the girl's motivation and passion, Sora and Shiro decide to aid Stephanie in getting Elkia back on its feet, ultimately aiming to become the new rulers of the enigmatic realm. [Written by MAL Rewrite]",
+        "background": "No Game No Life adapts the first three volumes of Yuu Kamiya's light novel series of the same title.",
+        "season": "spring",
+        "year": 2014,
+        "broadcast": {
+            "day": "Wednesdays",
+            "time": "21:30",
+            "timezone": "Asia/Tokyo",
+            "string": "Wednesdays at 21:30 (JST)"
+        },
+        "producers": [
+            {
+                "mal_id": 61,
+                "type": "anime",
+                "name": "Frontier Works",
+                "url": "https://myanimelist.net/anime/producer/61/Frontier_Works"
+            },
+            {
+                "mal_id": 108,
+                "type": "anime",
+                "name": "Media Factory",
+                "url": "https://myanimelist.net/anime/producer/108/Media_Factory"
+            },
+            {
+                "mal_id": 166,
+                "type": "anime",
+                "name": "Movic",
+                "url": "https://myanimelist.net/anime/producer/166/Movic"
+            },
+            {
+                "mal_id": 238,
+                "type": "anime",
+                "name": "AT-X",
+                "url": "https://myanimelist.net/anime/producer/238/AT-X"
+            }
+        ],
+        "licensors": [
+            {
+                "mal_id": 376,
+                "type": "anime",
+                "name": "Sentai Filmworks",
+                "url": "https://myanimelist.net/anime/producer/376/Sentai_Filmworks"
+            }
+        ],
+        "studios": [
+            {
+                "mal_id": 11,
+                "type": "anime",
+                "name": "Madhouse",
+                "url": "https://myanimelist.net/anime/producer/11/Madhouse"
+            }
+        ],
+        "genres": [
+            {
+                "mal_id": 4,
+                "type": "anime",
+                "name": "Comedy",
+                "url": "https://myanimelist.net/anime/genre/4/Comedy"
+            },
+            {
+                "mal_id": 10,
+                "type": "anime",
+                "name": "Fantasy",
+                "url": "https://myanimelist.net/anime/genre/10/Fantasy"
+            },
+            {
+                "mal_id": 9,
+                "type": "anime",
+                "name": "Ecchi",
+                "url": "https://myanimelist.net/anime/genre/9/Ecchi"
+            }
+        ],
+        "explicit_genres": [],
+        "themes": [
+            {
+                "mal_id": 62,
+                "type": "anime",
+                "name": "Isekai",
+                "url": "https://myanimelist.net/anime/genre/62/Isekai"
+            },
+            {
+                "mal_id": 11,
+                "type": "anime",
+                "name": "Strategy Game",
+                "url": "https://myanimelist.net/anime/genre/11/Strategy_Game"
+            }
+        ],
+        "demographics": []
+    }
+}
