@@ -45,6 +45,10 @@ MAL_CLIENT_ID=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ```
 python3 main.py
 ```
+6. Do the following discord slash command to set the notification channel (where you'll get notified of new eps):
+```
+/setchannel
+```
 
 ### Usage
 
