@@ -34,7 +34,7 @@ cd AnimeNotificationDiscordBot
 pip install -r requirements.txt
 ```
 4. Create a .env file in the folder and set the following variables, which should look like: (you can put your channel ID if you know, but it is  not required)
-  - BOT_API_KEY is your discord bot token which you can get by following [this](https://www.writebots.com/discord-bot-token/) (it is the token)
+  - BOT_API_KEY is your discord bot token which you can get by following [this](https://www.writebots.com/discord-bot-token/)
   - DISCORD_CHANNEL_ID represents the channel which the bot will notify you about new episodes. (you dont have to set it manually, ignore it)
   - MAL_CLIENT_ID is to use the MAL API, which you can get from [here](https://myanimelist.net/blog.php?eid=835707). Just following Step 0.
 ```
