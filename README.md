@@ -14,7 +14,8 @@ This is an Anime Discord bot that is built using the disnake library and it's us
 
 ### Prerequisites
 
-You will need to have the following installed:
+You will need to have the following:
+- Linux/MacOS
 - Python 3.7 or later
 - [PIP](https://pip.pypa.io/en/stable/installing/) to install the required libraries
 
