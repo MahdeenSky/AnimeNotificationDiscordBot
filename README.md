@@ -65,3 +65,9 @@ Note:
 - the bot is using scraping to get anime episode airing information, so if any issues with the scraping please let me know.
 - feel free to modify and use the code according to your usecase.
 
+<br><br>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/49484385/211614993-e9012fdd-27f4-48f7-a82e-ec1c2e139890.gif" />
+  <br>Enjoy >w<
+</p>
+
