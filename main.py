@@ -18,24 +18,21 @@ from myanimelistAPI import MyAnimeListAPI
 from jikan4pyAPI import JikanAPI
 from utilities import print_bot, isInteger, jsonOP
 
-# formatting
-en_space = " "
-invisible_space = "‎"
 
-# Global Variables
 load_dotenv()
 with open("useragents.txt", 'r') as f:
 	HEADERS = [{'User-Agent': header} for header in f.read().splitlines()]
 
-DOMAIN = "https://gogoplay1.com/" # anime ep scraping domain
+DOMAIN = "https://gogoplay1.com/"
 MAL_DOMAIN = "https://myanimelist.net/anime/"
-JSONFILENAME = "series.json" # stores all the tracked anime
-CHANNEL_ID = int(os.getenv("DISCORD_CHANNEL_ID")) # the discord channel which it will notify
-
+JSONFILENAME = "series.json"
+CHANNEL_ID = int(os.getenv("DISCORD_CHANNEL_ID"))
 MAL_CLIENT_ID = os.getenv("MAL_CLIENT_ID")
-DISCORD_TAG = "@everyone" # Change this to what role it will ping
+DISCORD_TAG = "@everyone"
+# os.chdir(os.path.dirname(__file__))
 
-class aclient(commands.Bot):
+
+class aclient(commands.Bot):    # Inherits from commands.Bot
 	def __init__(self):
 		super().__init__(intents=disnake.Intents.default(),
 						 command_prefix=commands.when_mentioned)
@@ -54,11 +51,7 @@ bot = aclient()
 mal_api = MyAnimeListAPI(MAL_CLIENT_ID)
 jikan_api = JikanAPI()
 anilist_api = Anilist()
-
 jsonOP = jsonOP(JSONFILENAME)
-if jsonOP.loadJSON() == {}:
-	jsonOP.saveJSON({"series": []})
-
 malID_to_aniListID = {}
 
 
@@ -100,7 +93,11 @@ def timeTillNextEpisode(anime_id):
 	url = 'https://graphql.anilist.co'
 	data = r.post(url, json={'query': query, 'variables': variables}).json()
 
-	time_data = data['data']['Media']['nextAiringEpisode']
+	try: # if parsing fails, then the anime is not airing
+		time_data = data['data']['Media']['nextAiringEpisode']
+	except:
+		time_data = None
+
 	if time_data is not None:
 		seconds = time_data['timeUntilAiring']
 	else:
@@ -200,6 +197,8 @@ def animeSelectionEmbedCards(animes):
 	embeds = [Embed(title="Which Anime to Add?", color=0xffff00)]
 	anime_titles = [anime["title"] for anime in animes]
 	longest_title_length = max([len(title) for title in anime_titles])
+	en_space = " "
+	invisible_space = "‎"
 	for i, title in enumerate(anime_titles, 1):
 		embed = Embed(url=f"https://www.lol{i}.com", color=0xff00ff)
 		space_length = longest_title_length - len(title) + title.count(":")
@@ -208,15 +207,22 @@ def animeSelectionEmbedCards(animes):
 		embeds.append(embed)
 	return embeds
 
-def animeDeletionEmbedCard(anime_titles):
-	embed = Embed(title="Which Anime to Remove?", color=0xfff000)
+# bot.slash_command(guild_ids=[id1, id2]) for specific commands in specific guilds
+def animeSelectionRemoveEmbed(anime_titles):
+	# one embed with all the anime titles
+	embed = Embed(title="Which Anime to Remove?", color=0xffff00)
+	longest_title_length = max([len(title) for title in anime_titles])
+	en_space = " "
+	invisible_space = "‎"
 	for i, title in enumerate(anime_titles, 1):
-		embed.add_field(name=f"{i}. {title}", value=invisible_space, inline=False)
+		space_length = longest_title_length - len(title) + title.count(":")
+		embed.add_field(name=f"{i}.\n{title}"+space_length*en_space+invisible_space, value=invisible_space, inline=False)
 	return embed
 
 
 @bot.slash_command(description="Adds an anime to the list")
 async def addanime(interaction: disnake.CommandInteraction, name: str):
+	await interaction.response.defer()
 	print_bot(f"Adding New Anime")
 	animes = jikan_api.searchAnime(anime_name=name)
 	anime_titles = [anime["title"] for anime in animes]
@@ -244,16 +250,16 @@ async def addanime(interaction: disnake.CommandInteraction, name: str):
 	view = View()
 	view.add_item(select)
 
-	await interaction.send("Which Anime To Add?", view=view, embeds=animeSelectionEmbedCards(animes), delete_after=30)
-
+	await interaction.followup.send("Which Anime To Add?", view=view, embeds=animeSelectionEmbedCards(animes), delete_after=30)
 
 @bot.slash_command(description="Removes an anime from the list")
 async def removeanime(interaction: disnake.CommandInteraction):
 	print_bot(f"Removing Anime")
+	# anime_titles = jikan_api.searchAnimeTitles(anime_name=name)
 	anime_titles = [anime[0] for anime in jsonOP.loadJSON()["series"]]
+	# print_bot(f"Querying for '{name}'")
 	print_bot(f"Choices are: '{', '.join(anime_titles)}'")
-	options = [disnake.SelectOption(label=i, value=i-1)
-			   for i in range(1, len(anime_titles)+1)]
+	options = [disnake.SelectOption(label=i, value=i-1) for i in range(1, len(anime_titles)+1)]
 	select = Select(placeholder="", options=options)
 
 	async def my_callback(interaction: disnake.CommandInteraction):
@@ -275,7 +281,7 @@ async def removeanime(interaction: disnake.CommandInteraction):
 	view = View()
 	view.add_item(select)
 
-	await interaction.send("Which Anime to Remove?", view=view, embed=animeDeletionEmbedCard(anime_titles), delete_after=30)
+	await interaction.send("Which Anime to Remove?", view=view, embed=animeSelectionRemoveEmbed(anime_titles), delete_after=30)
 
 
 @bot.slash_command(description="Shows the current tracked anime list")
@@ -301,50 +307,26 @@ async def listanime(interaction: disnake.CommandInteraction):
 
 	await interaction.followup.send(embed=animeListEmbedCard(current_series))
 
-@bot.slash_command(description="Select Channel to Announce New Episodes using Channel ID")
-async def setchannel(interaction: disnake.CommandInteraction):
-	executed_channel = interaction.channel_id
-	try:
-		with open(".env", 'r') as f:
-			env = f.read().split("\n")
-
-		with open(".env", 'w') as f:
-			for i, line in enumerate(env):
-				if line.startswith("DISCORD_CHANNEL_ID"):
-					env[i] = f"DISCORD_CHANNEL_ID={executed_channel}"
-					break
-			f.write("\n".join(env))
-			CHANNEL_ID = executed_channel
-	except Exception as e:
-		await interaction.send(f"{e}\nError occured, please try again.")
-		return
-
-	print_bot(f"Notification Channel set to {executed_channel}")
-	await interaction.send(f"Notification Channel set to {executed_channel}")
-
-
-@bot.slash_command(description="Help information for every command")
-async def help(interaction: disnake.CommandInteraction):
-	embed = disnake.Embed(title="Commands", color=0xf0000f)
-	embed.add_field(name="/addanime", value="Adds an anime to the list", inline=False)
-	embed.add_field(name="/removeanime", value="Removes an anime from the list", inline=False)
-	embed.add_field(name="/listanime", value="Shows the current tracked anime list", inline=False)
-	embed.add_field(name="/setchannel", value="Sets the channel to notify new episodes in", inline=False)
-	embed.add_field(name="/help", value="Help information for every command", inline=False)
-	await interaction.send(embed=embed)
 
 @tasks.loop(count=1)
 async def scrapeAiringAnime():
 	"""
 	Scrapes the GogoPlay website for airing anime
 	"""
+	error = None
 	while True:
 		try:
 			res = r.get(DOMAIN, headers=choice(HEADERS))
 			soup = BeautifulSoup(res.text, "html.parser")
 			episodes = soup.findAll("div", {"class": "name"})
-		except HTTPException as e:
+		except Exception as e:
+			if error == e:
+				print("Same error, shutting down")
+				exit()
+			error = e
 			print(e)
+			await asyncio.sleep(randint(150, 300))
+			continue
 			# os.system("kill 1")
 
 		for i, episode in enumerate(episodes):
@@ -384,11 +366,15 @@ async def scrapeAiringAnime():
 			if not airing:
 				registeredAnime.pop(index)
 				jsonOP.saveJSON({"series": registeredAnime})
-				episode_number = mal_api.getAnimeByID(anime_id)["num_episodes"]
+				try:
+					episode_number = mal_api.getAnimeByID(anime_id)["num_episodes"]
+				except Exception as e:
+					print_bot(e)
+					episode_number = "unknown"
 				print_bot(
 					f"Anime '{anime}' is no longer airing at episode '{episode_number}'")
 
-		await asyncio.sleep(randint(300, 600)) # 5-10 minutes
+		await asyncio.sleep(randint(300, 600))
 
 
 def scrapeVideo(link):
@@ -407,11 +393,9 @@ async def notify(anime_name, anime_id, episode_number, video_link, airing=True):
 	Notifies on Discord when an anime has aired a new episode
 	"""
 	message = DISCORD_TAG + f" {anime_name} Episode {episode_number}"
-	try:
-		channel = bot.get_channel(CHANNEL_ID)
-		await channel.send(message, embed=episodeEmbedCard(anime_id, episode_number, video_link, airing))
-	except Exception as e:
-		print(f"{e}\nFailed to get Channel/Send Notification")
+	channel = bot.get_channel(CHANNEL_ID)
+	await channel.send(message, embed=episodeEmbedCard(anime_id, episode_number, video_link, airing))
+
 
 # keep_alive()
 bot.run(os.getenv('BOT_API_KEY'))
